@@ -23,6 +23,7 @@ width:100%;
 
 export const TextArea = styled.textarea`
 display:inline-block;
+width:100%;
 border:1px solid #dedede;
 border-radius:15px;
 padding:6px;

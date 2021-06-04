@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 
-const StyledButton = styled.button<{color:string,type:string}>`
+const StyledButton = styled.button<{styleType:string}>`
     border:none;
     outline:none;
-    background-color:${props => props.type==='primary' ? "#000" : 'blue'};
+    background-color:${props => props.styleType==='primary' ? "#000" : 'blue'};
     color:#fff;
     border-radius:5px;
     display:inline-block;
@@ -14,12 +14,12 @@ const StyledButton = styled.button<{color:string,type:string}>`
 
 interface ButtonProps{
     title:string
-    color:string
+    styleType: string
 }
 
-const Button : React.FC<ButtonProps> = ({title,type}) => {
+const Button : React.FC<ButtonProps> = ({title,styleType}) => {
     return(
-        <StyledButton type="button" className="btn" type={type}>{title}</StyledButton>
+        <StyledButton type="submit" className="btn" styleType={styleType}>{title}</StyledButton>
     )
 }
 

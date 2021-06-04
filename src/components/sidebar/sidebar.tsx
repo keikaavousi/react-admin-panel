@@ -50,7 +50,7 @@ const Sidebar : React.FC = () => {
                         )
                     })}
             </SidebarList>
-            <Button title="logout" color="#ccc"/>
+            <Button title="logout" styleType="primary"/>
         </Aside>
     )
 }

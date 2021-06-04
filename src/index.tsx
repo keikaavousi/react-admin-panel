@@ -5,6 +5,8 @@ import Header from './components/header/header'
 import Sidebar from './components/sidebar/sidebar'
 import Main from './components/main/main'
 import styled from 'styled-components'
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import routes from './routes'
 
 const Wrapper = styled.div`
     width:100%;
@@ -16,8 +18,25 @@ const Index = () => {
         <>
         <Header title="Admin Panel" name="Mohammad Reza"/>
         <Wrapper>
-            <Sidebar/>
-            <Main/>
+
+            <Router>
+                <Sidebar/>
+                <Switch>
+                   {routes.map(({containerPath,name,path})=>
+                        <Route key={name} exact path={path}>
+                            {
+                                props => {
+                                   let Container = require(`${containerPath}`).default
+                                   return(
+                                        <Container {...props}/>
+                                   )
+                                }
+                            }
+                        </Route>
+                   )}
+                </Switch>
+            </Router>
+
         </Wrapper>
        </>
     )

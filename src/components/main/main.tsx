@@ -16,19 +16,9 @@ const inputs = [
         type:'text'
     },
     {
-        label:'Family',
-        placeholder:"your family",
-        type:'text'
-    },
-    {
         label:'Email',
         placeholder:"your email",
         type:'email'
-    },
-    {
-        label:'Password',
-        placeholder:"your password",
-        type:'password'
     },
     {
         label:'Message',
@@ -39,9 +29,13 @@ const inputs = [
 
 
 const Main : React.FC = () => {
+    const handleSubmit = () => {
+        alert('submited!')
+    }
+
     return(
         <StyledMain>
-                <Form inputs={inputs}/>
+                <Form inputs={inputs} onSubmit={handleSubmit}/>
         </StyledMain>
     )
 }
