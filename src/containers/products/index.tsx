@@ -13,6 +13,24 @@ padding:15px;
 
 const Index:React.FC = () => {
     const [products,setProducts] = useState<{id:number;title:string;price:number}[] | undefined >()
+    const headers = ['id','title','price']
+    const buttons = [
+        {
+            title:'Edit',
+            route:'products/edit',
+            cssClass:'primary'
+            },
+        {
+            title:'Delete',
+            route:'products/delete',
+            cssClass:'secondary'
+        },
+        {
+            title:'View',
+            route:'products/view',
+            cssClass:'primary'
+        }
+    ]
 
     useEffect(()=>{
         fetch('https://fakestoreapi.com/products')
@@ -36,7 +54,7 @@ const Index:React.FC = () => {
         // </ul>
         <Container>
         <h1>Products</h1>
-        <Table data={products}/>
+        <Table data={products} headers={headers} buttons={buttons}/>
         </Container>
     )
 }

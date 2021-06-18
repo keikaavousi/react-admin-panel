@@ -1,4 +1,5 @@
 import Button from "../button/button"
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
 
@@ -21,18 +22,24 @@ table{
 `
 
 interface TableProps{
-    data: {id:number;title:string;price:number}[] | undefined
+    data: any[] | undefined
+    headers : string[]
+    buttons: {title:string,route:string,cssClass:string}[]
 }
 
-const Table:React.FC<TableProps> = ({data}) => {
+const Table:React.FC<TableProps> = ({data,headers,buttons}) => {
     return(
         <StyledTable>
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Operations</th>
+                   {
+                       headers.map(header=>{
+                           return(
+                               <th>{header}</th>
+                           )
+                       })
+                   }
+                   <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -40,11 +47,31 @@ const Table:React.FC<TableProps> = ({data}) => {
                 data?.map(row=>{
                     return(
                         <tr key={row.id}>
-                            <td>{row.id}</td>
-                            <td>{row.title}</td>
-                            <td>{row.price}</td>
-                            <td><Button title="Edit" styleType="primary"/>
-                            <Button title="Delete" styleType="secondary"/></td>
+                           {/* {
+                               Object.entries(row).map(dt=>{
+                                   return(
+                                       <td>{dt}</td>
+                                   )
+                               })
+                           } */}
+                           {
+                               headers.map(key=>{
+                                   return(
+                                       <td>{row[key]}</td>
+                                   )
+                               })
+                           }
+                            <td>
+                                {
+                                    buttons.map(btn=>{
+                                        return(
+                                            <Link to={`${btn.route}/${row.id}`}>
+                                                <Button title={btn.title} styleType={btn.cssClass}/>
+                                            </Link>
+                                        )
+                                    })
+                                }
+                            </td>
                         </tr>
                     )
                 })
@@ -54,3 +81,43 @@ const Table:React.FC<TableProps> = ({data}) => {
     )
 }
 export default Table;
+
+
+
+
+
+// const person = [
+//     {
+//     id:1,
+//     name:'John',
+//     family:'Doe'
+// },
+// {
+//     id:1,
+//     name:'John',
+//     family:'Doe'
+// },
+// {
+//     id:1,
+//     name:'John',
+//     family:'Doe'
+// }
+// ]
+// const headers = Object.keys(person[0])
+
+
+// person.map(p=>{
+//    {let row = Object.entries(p)}
+//    row.map(r=>{
+//     return(
+//         <td>{r}</td>
+//     )
+//    })
+
+// })
+
+// headers.map(header=>{
+//     return(
+//         <th>{header}</th>
+//     )
+// })
