@@ -19,5 +19,10 @@ const routes = [
     path: "/users",
     containerPath: "./containers/users/index",
   },
+  {
+    name: "login",
+    path: "/login",
+    containerPath: "./containers/login/index",
+  },
 ];
 export default routes;

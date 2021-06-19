@@ -12,36 +12,36 @@ padding:15px;
 `
 
 const Index:React.FC = () => {
-    const [products,setProducts] = useState<{id:number;title:string;price:number}[] | undefined >()
-    const headers = ['id','title','price']
+    const [carts,setCarts] = useState<{id:number;date:string;userId:number}[] | undefined >()
+    const headers = ['id','date','userId']
     const buttons = [
         {
             title:'Edit',
-            route:'products/edit',
+            route:'carts/edit',
             cssClass:'primary'
             },
         {
             title:'Delete',
-            route:'products/delete',
+            route:'carts/delete',
             cssClass:'secondary'
         },
         {
             title:'View',
-            route:'products/view',
+            route:'carts/view',
             cssClass:'primary'
         }
     ]
 
     useEffect(()=>{
-        fetch('https://fakestoreapi.com/products')
+        fetch('https://fakestoreapi.com/carts')
         .then(res=>res.json())
-        .then(result=>setProducts(result))
+        .then(result=>setCarts(result))
     },[])
 
     return(
         <Container>
-        <HeaderTitle>Products</HeaderTitle>
-        <Table data={products} headers={headers} buttons={buttons}/>
+        <HeaderTitle>Carts</HeaderTitle>
+        <Table data={carts} headers={headers} buttons={buttons}/>
         </Container>
     )
 }

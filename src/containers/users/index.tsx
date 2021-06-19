@@ -12,36 +12,41 @@ padding:15px;
 `
 
 const Index:React.FC = () => {
-    const [products,setProducts] = useState<{id:number;title:string;price:number}[] | undefined >()
-    const headers = ['id','title','price']
+    const [users,setUsers] = useState<{id:number;username:string;email:string}[] | undefined >()
+    const headers = ['id','username','email']
     const buttons = [
         {
             title:'Edit',
-            route:'products/edit',
+            route:'user/edit',
             cssClass:'primary'
             },
         {
             title:'Delete',
-            route:'products/delete',
+            route:'user/delete',
             cssClass:'secondary'
         },
         {
             title:'View',
-            route:'products/view',
+            route:'user/view',
             cssClass:'primary'
         }
     ]
 
     useEffect(()=>{
-        fetch('https://fakestoreapi.com/products')
+        const token = sessionStorage.getItem('auth')
+        fetch('https://fakestoreapi.com/users',{
+            headers:{
+                'Authorization': `Bearer ${token}`
+            }
+        })
         .then(res=>res.json())
-        .then(result=>setProducts(result))
+        .then(result=>setUsers(result))
     },[])
 
     return(
         <Container>
-        <HeaderTitle>Products</HeaderTitle>
-        <Table data={products} headers={headers} buttons={buttons}/>
+        <HeaderTitle>Users</HeaderTitle>
+        <Table data={users} headers={headers} buttons={buttons}/>
         </Container>
     )
 }

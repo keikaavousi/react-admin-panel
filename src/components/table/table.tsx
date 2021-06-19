@@ -1,6 +1,7 @@
 import Button from "../button/button"
 import {Link} from 'react-router-dom'
-import styled from 'styled-components'
+import styled,{keyframes} from 'styled-components'
+import Loading from '../loading/loading'
 
 
 
@@ -21,15 +22,18 @@ table{
  }
 `
 
+
+
 interface TableProps{
     data: any[] | undefined
     headers : string[]
     buttons: {title:string,route:string,cssClass:string}[]
 }
 
+
 const Table:React.FC<TableProps> = ({data,headers,buttons}) => {
-    return(
-        <StyledTable>
+    return data ?
+        (<StyledTable>
             <thead>
                 <tr>
                    {
@@ -77,8 +81,7 @@ const Table:React.FC<TableProps> = ({data,headers,buttons}) => {
                 })
             }
             </tbody>
-        </StyledTable>
-    )
+        </StyledTable>) : (<Loading/>)
 }
 export default Table;
 
