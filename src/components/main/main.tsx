@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Form from '../form/form'
-
+import {addProduct} from '../../api/products'
 
 const StyledMain = styled.main`
     width:80%;
@@ -12,25 +12,31 @@ const StyledMain = styled.main`
 const inputs = [
     {
         label:'Name',
-        placeholder:"your name",
-        type:'text'
+        placeholder:"product name",
+        type:'text',
+        name:'title'
     },
     {
-        label:'Email',
-        placeholder:"your email",
-        type:'email'
+        label:'price',
+        placeholder:"product family",
+        type:'number',
+        name:'price'
     },
     {
-        label:'Message',
-        placeholder:"your message",
-        type:'textarea'
+        label:'image address',
+        placeholder:"product image address",
+        type:'text',
+        name:'image'
     },
 ]
 
 
 const Main : React.FC = () => {
-    const handleSubmit = () => {
-        alert('submited!')
+    const handleSubmit = (payload:Object) => {
+        addProduct(payload)
+        .then(res=>{
+            alert('product added!')
+        })
     }
 
     return(
