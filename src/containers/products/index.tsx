@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react'
 import Table from '../../components/table/table'
 import styled from 'styled-components'
+import {getProducts} from '../../api/products'
 
 
 const HeaderTitle = styled.h1`
@@ -33,9 +34,9 @@ const Index:React.FC = () => {
     ]
 
     useEffect(()=>{
-        fetch('https://fakestoreapi.com/products')
-        .then(res=>res.json())
-        .then(result=>setProducts(result))
+        getProducts()
+        .then(result=> {setProducts(result)})
+
     },[])
 
     return(
